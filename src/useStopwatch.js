@@ -2,38 +2,38 @@ import { useState, useCallback } from 'react';
 import { Time } from './utils';
 import { useInterval } from './hooks';
 
-export default function useStopwatch({ autoStart, offsetTimestamp } = {}) {
-  const [passedSeconds, setPassedSeconds] = useState(Time.getSecondsFromExpiry(offsetTimestamp, true) || 0);
+export default function useStopwatch({ autoStart, offsetTimestamp, delay = 1000 } = {}) {
+  const [passedMilliseconds, setPassedMilliseconds] = useState(Time.getTimeFromMilliseconds(offsetTimestamp, false) || 0);
   const [prevTime, setPrevTime] = useState(new Date());
-  const [seconds, setSeconds] = useState(passedSeconds + Time.getSecondsFromPrevTime(prevTime || 0, true));
+  const [milliseconds, setMilliseconds] = useState(passedMilliseconds + Time.getMillisecondsFromPrevTime(prevTime || 0, true));
   const [isRunning, setIsRunning] = useState(autoStart);
 
   useInterval(() => {
-    setSeconds(passedSeconds + Time.getSecondsFromPrevTime(prevTime, true));
-  }, isRunning ? 1000 : null);
+    setMilliseconds(passedMilliseconds + Time.getMillisecondsFromPrevTime(prevTime, true));
+  }, isRunning ? delay : null);
 
   const start = useCallback(() => {
     const newPrevTime = new Date();
     setPrevTime(newPrevTime);
     setIsRunning(true);
-    setSeconds(passedSeconds + Time.getSecondsFromPrevTime(newPrevTime, true));
-  }, [passedSeconds]);
+    setMilliseconds(passedMilliseconds + Time.getMillisecondsFromPrevTime(newPrevTime, true));
+  }, [passedMilliseconds]);
 
   const pause = useCallback(() => {
-    setPassedSeconds(seconds);
+    setPassedMilliseconds(milliseconds);
     setIsRunning(false);
-  }, [seconds]);
+  }, [milliseconds]);
 
   const reset = useCallback((offset = 0, newAutoStart = true) => {
-    const newPassedSeconds = Time.getSecondsFromExpiry(offset, true) || 0;
+    const newPassedMilliseconds = Time.getMillisecondsFromExpiry(offset, true) || 0;
     const newPrevTime = new Date();
     setPrevTime(newPrevTime);
-    setPassedSeconds(newPassedSeconds);
+    setPassedMilliseconds(newPassedMilliseconds);
     setIsRunning(newAutoStart);
-    setSeconds(newPassedSeconds + Time.getSecondsFromPrevTime(newPrevTime, true));
+    setMilliseconds(newPassedMilliseconds + Time.getMillisecondsFromPrevTime(newPrevTime, true));
   }, []);
 
   return {
-    ...Time.getTimeFromSeconds(seconds), start, pause, reset, isRunning,
+    ...Time.getTimeFromMilliseconds(milliseconds), start, pause, reset, isRunning,
   };
 }
