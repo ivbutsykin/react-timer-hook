@@ -5,6 +5,7 @@ import TimerStyled from './TimerStyled';
 
 export default function UseStopwatchDemo() {
   const {
+    milliseconds,
     seconds,
     minutes,
     hours,
@@ -18,7 +19,7 @@ export default function UseStopwatchDemo() {
   return (
     <div>
       <h2>UseStopwatch Demo</h2>
-      <TimerStyled seconds={seconds} minutes={minutes} hours={hours} days={days} />
+      <TimerStyled milliseconds={milliseconds} seconds={seconds} minutes={minutes} hours={hours} days={days} />
       <Button onClick={start}>Start</Button>
       <Button onClick={pause}>Pause</Button>
       <Button onClick={reset}>Reset</Button>
