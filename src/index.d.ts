@@ -58,6 +58,8 @@ interface AnimatedStopwatchResult {
     reset: (offsetTimestamp?: Date, autoStart?: boolean) => void;
 }
 
+export function useAnimatedStopwatch(settings?: AnimatedStopwatchSettings): AnimatedStopwatchResult
+
 interface TimeSettings {
     format?: '12-hour';
 }
