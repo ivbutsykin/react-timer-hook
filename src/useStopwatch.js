@@ -3,7 +3,7 @@ import { Time } from './utils';
 import { useInterval } from './hooks';
 
 export default function useStopwatch({ autoStart, offsetTimestamp, delay = 1000 } = {}) {
-  const [passedMilliseconds, setPassedMilliseconds] = useState(Time.getTimeFromMilliseconds(offsetTimestamp, false) || 0);
+  const [passedMilliseconds, setPassedMilliseconds] = useState(Time.getMillisecondsFromExpiry(offsetTimestamp, false) || 0);
   const [prevTime, setPrevTime] = useState(new Date());
   const [milliseconds, setMilliseconds] = useState(passedMilliseconds + Time.getMillisecondsFromPrevTime(prevTime || 0, true));
   const [isRunning, setIsRunning] = useState(autoStart);
