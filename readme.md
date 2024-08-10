@@ -106,7 +106,8 @@ import { useStopwatch } from 'react-timer-hook';
 
 function MyStopwatch() {
   const {
-    totalSeconds,
+    totalMilliseconds,
+    milliseconds,
     seconds,
     minutes,
     hours,
@@ -123,7 +124,7 @@ function MyStopwatch() {
       <h1>react-timer-hook</h1>
       <p>Stopwatch Demo</p>
       <div style={{fontSize: '100px'}}>
-        <span>{days}</span>:<span>{hours}</span>:<span>{minutes}</span>:<span>{seconds}</span>
+        <span>{days}</span>:<span>{hours}</span>:<span>{minutes}</span>:<span>{seconds}</span>,<span>{milliseconds}</span>
       </div>
       <p>{isRunning ? 'Running' : 'Not running'}</p>
       <button onClick={start}>Start</button>
@@ -153,11 +154,12 @@ export default function App() {
 
 | key | Type | Description |
 | --- | --- | ---- |
+| milliseconds | number | milliseconds value |
 | seconds | number | seconds value |
 | minutes | number | minutes value |
 | hours | number | hours value |
 | days | number | days value |
-| totalSeconds | number | total number of seconds in stopwatch NOT converted to minutes, hours or days |
+| totalMilliseconds | number | total number of milliseconds in stopwatch NOT converted to seconds, minutes, hours or days |
 | isRunning | boolean | flag to indicate if stopwatch is running or not |
 | start | function | function to be called to start/resume stopwatch |
 | pause | function | function to be called to pause stopwatch |
