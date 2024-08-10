@@ -22,10 +22,12 @@ export function useTimer(settings: TimerSettings): TimerResult
 interface StopwatchSettings {
     autoStart?: boolean;
     offsetTimestamp?: Date;
+    delay?: number;
 }
 
 interface StopwatchResult {
-    totalSeconds: number;
+    totalMilliseconds: number;
+    milliseconds: number;
     seconds: number;
     minutes: number;
     hours: number;
