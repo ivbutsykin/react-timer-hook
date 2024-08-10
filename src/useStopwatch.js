@@ -3,20 +3,20 @@ import { Time } from './utils';
 import { useInterval } from './hooks';
 
 export default function useStopwatch({ autoStart, offsetTimestamp, delay = 1000 } = {}) {
-  const [passedMilliseconds, setPassedMilliseconds] = useState(Time.getMillisecondsFromExpiry(offsetTimestamp, false) || 0);
+  const [passedMilliseconds, setPassedMilliseconds] = useState(Time.getMillisecondsFromExpiry(offsetTimestamp) || 0);
   const [prevTime, setPrevTime] = useState(new Date());
-  const [milliseconds, setMilliseconds] = useState(passedMilliseconds + Time.getMillisecondsFromPrevTime(prevTime || 0, true));
+  const [milliseconds, setMilliseconds] = useState(passedMilliseconds + Time.getMillisecondsFromPrevTime(prevTime || 0));
   const [isRunning, setIsRunning] = useState(autoStart);
 
   useInterval(() => {
-    setMilliseconds(passedMilliseconds + Time.getMillisecondsFromPrevTime(prevTime, true));
+    setMilliseconds(passedMilliseconds + Time.getMillisecondsFromPrevTime(prevTime));
   }, isRunning ? delay : null);
 
   const start = useCallback(() => {
     const newPrevTime = new Date();
     setPrevTime(newPrevTime);
     setIsRunning(true);
-    setMilliseconds(passedMilliseconds + Time.getMillisecondsFromPrevTime(newPrevTime, true));
+    setMilliseconds(passedMilliseconds + Time.getMillisecondsFromPrevTime(newPrevTime));
   }, [passedMilliseconds]);
 
   const pause = useCallback(() => {
@@ -25,12 +25,12 @@ export default function useStopwatch({ autoStart, offsetTimestamp, delay = 1000 
   }, [milliseconds]);
 
   const reset = useCallback((offset = 0, newAutoStart = true) => {
-    const newPassedMilliseconds = Time.getMillisecondsFromExpiry(offset, true) || 0;
+    const newPassedMilliseconds = Time.getMillisecondsFromExpiry(offset) || 0;
     const newPrevTime = new Date();
     setPrevTime(newPrevTime);
     setPassedMilliseconds(newPassedMilliseconds);
     setIsRunning(newAutoStart);
-    setMilliseconds(newPassedMilliseconds + Time.getMillisecondsFromPrevTime(newPrevTime, true));
+    setMilliseconds(newPassedMilliseconds + Time.getMillisecondsFromPrevTime(newPrevTime));
   }, []);
 
   return {

@@ -33,11 +33,11 @@ export default class Time {
     };
   }
 
-  static getMillisecondsFromExpiry(expiry, shouldRound) {
+  static getMillisecondsFromExpiry(expiry) {
     const now = new Date().getTime();
     const milliSecondsDistance = expiry - now;
     if (milliSecondsDistance > 0) {
-      return shouldRound ? Math.round(milliSecondsDistance) : milliSecondsDistance;
+      return milliSecondsDistance;
     }
     return 0;
   }
@@ -52,11 +52,11 @@ export default class Time {
     return 0;
   }
 
-  static getMillisecondsFromPrevTime(prevTime, shouldRound) {
+  static getMillisecondsFromPrevTime(prevTime) {
     const now = new Date().getTime();
     const milliSecondsDistance = now - prevTime;
     if (milliSecondsDistance > 0) {
-      return shouldRound ? Math.round(milliSecondsDistance) : milliSecondsDistance;
+      return milliSecondsDistance;
     }
     return 0;
   }

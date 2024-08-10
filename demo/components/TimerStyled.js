@@ -37,7 +37,7 @@ export default function TimerStyled({ milliseconds, seconds, minutes, hours, day
       <SepartorContainer><Separtor /><Separtor /></SepartorContainer>
       <Digit value={seconds} title="SECONDS" />
       {
-        !!milliseconds && (
+        typeof milliseconds !== "undefined"  && (
           <React.Fragment>
             <SepartorContainer><Separtor /><Separtor /></SepartorContainer>
             <Digit value={milliseconds} title="MILLISECONDS" />
