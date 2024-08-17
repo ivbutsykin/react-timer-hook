@@ -4,7 +4,8 @@ React timer hook is a custom [react hook](https://reactjs.org/docs/hooks-intro.h
 
 1. `useTimer`: Timers (countdown timer)
 2. `useStopwatch`: Stopwatch (count up timer)
-3. `useTime`: Time (return current time)
+3. `useAnimatedStopwatch`: Stopwatch based on `requestAnimationFrame` (count up timer)
+4. `useTime`: Time (return current time)
 
 ---
 
@@ -168,6 +169,77 @@ export default function App() {
 
 ---
 
+## `useStopwatch` - [Demo](https://amrlabib.github.io/react-timer-hook/)
+
+### Example
+
+```javascript
+import React from 'react';
+import { useAnimatedStopwatch } from 'react-timer-hook';
+
+function MyAnimatedStopwatch() {
+  const {
+    totalMilliseconds,
+    milliseconds,
+    seconds,
+    minutes,
+    hours,
+    days,
+    isRunning,
+    start,
+    pause,
+    reset,
+  } = useAnimatedStopwatch({ autoStart: true });
+
+
+  return (
+    <div style={{textAlign: 'center'}}>
+      <h1>react-timer-hook</h1>
+      <p>Animated Stopwatch Demo</p>
+      <div style={{fontSize: '100px'}}>
+        <span>{days}</span>:<span>{hours}</span>:<span>{minutes}</span>:<span>{seconds}</span>,<span>{milliseconds}</span>
+      </div>
+      <p>{isRunning ? 'Running' : 'Not running'}</p>
+      <button onClick={start}>Start</button>
+      <button onClick={pause}>Pause</button>
+      <button onClick={reset}>Reset</button>
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <div>
+      <MyAnimatedStopwatch />
+    </div>
+  );
+}
+```
+
+### Settings
+
+| key | Type | Required | Description |
+| --- | --- | --- | ---- |
+| autoStart | boolean | No | if set to `true` stopwatch will auto start, by default it is set to `false` |
+| offsetTimestamp | Date object | No | this will define the initial stopwatch offset example: `const stopwatchOffset = new Date(); stopwatchOffset.setSeconds(stopwatchOffset.getSeconds() + 300);` this will result in a 5 minutes offset and stopwatch will start from 0:0:5:0 instead of 0:0:0:0 |
+
+### Values
+
+| key | Type | Description |
+| --- | --- | ---- |
+| milliseconds | number | milliseconds value |
+| seconds | number | seconds value |
+| minutes | number | minutes value |
+| hours | number | hours value |
+| days | number | days value |
+| totalMilliseconds | number | total number of milliseconds in stopwatch NOT converted to seconds, minutes, hours or days |
+| isRunning | boolean | flag to indicate if stopwatch is running or not |
+| start | function | function to be called to start/resume stopwatch |
+| pause | function | function to be called to pause stopwatch |
+| reset | function | function to be called to reset stopwatch to 0:0:0:0, you can also pass offset parameter to this function to reset stopwatch with offset, similar to how `offsetTimestamp` will offset the initial stopwatch time, this function will accept also a second argument which will decide if stopwatch should automatically start after reset or not default is `true` |
+
+
+---
 
 ## `useTime` - [Demo](https://amrlabib.github.io/react-timer-hook/)
 

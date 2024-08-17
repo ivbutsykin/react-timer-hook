@@ -1,11 +1,13 @@
 import { useEffect } from 'react';
 import useTimer from './useTimer';
 import useStopwatch from './useStopwatch';
+import useAnimatedStopwatch from './useAnimatedStopwatch';
 import useTime from './useTime';
 
 export {
   useTimer,
   useStopwatch,
+  useAnimatedStopwatch,
   useTime,
 };
 

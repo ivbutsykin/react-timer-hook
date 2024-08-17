@@ -40,6 +40,26 @@ interface StopwatchResult {
 
 export function useStopwatch(settings?: StopwatchSettings): StopwatchResult
 
+interface AnimatedStopwatchSettings {
+    autoStart?: boolean;
+    offsetTimestamp?: Date;
+}
+
+interface AnimatedStopwatchResult {
+    totalMilliseconds: number;
+    milliseconds: number;
+    seconds: number;
+    minutes: number;
+    hours: number;
+    days: number;
+    isRunning: boolean;
+    start: () => void;
+    pause: () => void;
+    reset: (offsetTimestamp?: Date, autoStart?: boolean) => void;
+}
+
+export function useAnimatedStopwatch(settings?: AnimatedStopwatchSettings): AnimatedStopwatchResult
+
 interface TimeSettings {
     format?: '12-hour';
 }

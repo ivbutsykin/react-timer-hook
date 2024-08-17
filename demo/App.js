@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import UseTimerDemo from './components/UseTimerDemo';
 import UseStopwatchDemo from './components/UseStopwatchDemo';
+import UseAnimatedStopwatchDemo from './components/UseAnimatedStopwatchDemo';
 import UseTimeDemo from './components/UseTimeDemo';
 
 const GlobalStyle = createGlobalStyle`
@@ -69,6 +70,8 @@ export default function App() {
         <UseTimerDemo expiryTimestamp={time} />
         <Separator />
         <UseStopwatchDemo />
+        <Separator />
+        <UseAnimatedStopwatchDemo />
         <Separator />
         <UseTimeDemo />
       </Container>
