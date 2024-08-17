@@ -169,7 +169,7 @@ export default function App() {
 
 ---
 
-## `useStopwatch` - [Demo](https://amrlabib.github.io/react-timer-hook/)
+## `useAnimatedStopwatch` - [Demo](https://amrlabib.github.io/react-timer-hook/)
 
 ### Example
 
